@@ -1,5 +1,5 @@
 # Author: Deepak Kumar Singh
-# Description: Day 18 of 100 days of code, Turtle graphics
+# Description: Day 18 of 100 days of code, Turtle graphics, Hirst Spot painting with colorgram
 # Date Created: 02/01/2022
 # Date Modified: 02/01/2022
 
@@ -15,7 +15,7 @@ colors = ["dodger blue", "spring green", "green yellow", "tan", "magenta", "dark
 
 size = [i for i in range(10)]
 direction = [0, 90, 180, 270]
-tim.pensize(2)
+tim.pensize(1)
 
 
 # for _ in range(4):
@@ -66,9 +66,9 @@ def random_color():
     return color
 
 
-def draw_spirograph():
+def draw_spirograph(size):
     tim.speed(0)
-    for _ in range(100):
+    for _ in range(int(360/size)):
         tim.color(random_color())
         tim.circle(50)
         current_heading = tim.heading()
@@ -77,7 +77,7 @@ def draw_spirograph():
 
 # random_walk()
 
-draw_spirograph()
+draw_spirograph(10)
 
 screen = t.Screen()
 screen.exitonclick()
