@@ -1,12 +1,16 @@
 # Author: Deepak Kumar Singh
-# Description: Build a snake game
+# Description: Build a snake game. Class Inheritance is the process of inheriting methods from the class.
 # Date Created: 06/01/2022
 # Date Modified: 06/01/2022
 
 from turtle import Turtle
 
-X_POS = [-40, -20, 0]
+STARTING_POSITION = [(-40, 0), (-20, 0), (0, 0)]
 MOVE_DISTANCE = 20
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
 
 
 class Snake:
@@ -16,13 +20,19 @@ class Snake:
         self.head = self.segments[0]
 
     def create_snake(self):
-        for i in range(3):
-            new_segment = Turtle("square")
-            new_segment.color("white")
-            new_segment.penup()
-            # new_segment.speed(1)
-            new_segment.goto(X_POS[i], 0)
-            self.segments.append(new_segment)
+        for pos in STARTING_POSITION:
+            self.add_segment(pos)
+
+
+    def add_segment(self, position):
+        new_segment = Turtle("square")
+        new_segment.color("white")
+        new_segment.penup()
+        new_segment.goto(position)
+        self.segments.append(new_segment)
+
+    def extend_segment(self):
+        self.add_segment(self.segments[-1].position())
 
     def move(self):
         for seg in range(len(self.segments) - 1, 0,
@@ -30,18 +40,22 @@ class Snake:
             x_cor = self.segments[seg - 1].xcor()
             y_cor = self.segments[seg - 1].ycor()
             self.segments[seg].goto(x_cor, y_cor)
-        self.segments[0].forward(MOVE_DISTANCE)
+        self.head.forward(MOVE_DISTANCE)
 
     def up(self):
-        self.head.setheading(90)
+        if self.head.setheading != DOWN:
+            self.head.setheading(UP)
         # self.forward(MOVE_DISTANCE)
 
     def down(self):
-        self.head.setheading(270)
+        if self.head.setheading != UP:
+            self.head.setheading(DOWN)
         # self.forward(MOVE_DISTANCE)
 
     def left(self):
-        self.head.setheading(180)
+        if self.head.setheading != RIGHT:
+            self.head.setheading(LEFT)
 
     def right(self):
-        self.head.setheading(0)
+        if self.head.setheading != LEFT:
+            self.head.setheading(RIGHT)
